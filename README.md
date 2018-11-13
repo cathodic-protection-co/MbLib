@@ -6,6 +6,8 @@ This is a basic, portable, Modbus library with associated command line tools, wr
 ## Contents
 1. [Installation](#installation)
 1. [Command Line Usage](#command-line-usage)
+1. [Library Usage](#library-usage)
+1. [Dependencies](#dependencies)
 1. [Road Map](#road-map)
 
 ## Installation
@@ -48,7 +50,7 @@ mbcmd read3 --port <port_name> [options]
 
 `--baud <baud_rate>` – The baud rate for the port (default: `19200`).
 
-`--format <format>` – The data format (default: 8N1). Only `8` data bits are currently supported. Parity modes supported are `N` (none), `E` (even), `O` (odd), `M` (mark) and `S` (space). `1` or `2` stop bits are supported.
+`--format <format>` – The data format (default: `8N1`). Only `8` data bits are currently supported. Parity modes supported are `N` (none), `E` (even), `O` (odd), `M` (mark) and `S` (space). `1` or `2` stop bits are supported.
 
 `--unitadr <unit_adr>` – The Modbus device address (default: `1`).
 
@@ -69,7 +71,7 @@ mbcmd read4 --port <port_name> [options]
 
 `--baud <baud_rate>` – The baud rate for the port (default: `19200`).
 
-`--format <format>` – The data format (default: 8N1). Only `8` data bits are currently supported. Parity modes supported are `N` (none), `E` (even), `O` (odd), `M` (mark) and `S` (space). `1` or `2` stop bits are supported.
+`--format <format>` – The data format (default: `8N1`). Only `8` data bits are currently supported. Parity modes supported are `N` (none), `E` (even), `O` (odd), `M` (mark) and `S` (space). `1` or `2` stop bits are supported.
 
 `--unitadr <unit_adr>` – The Modbus device address (default: `1`).
 
@@ -77,8 +79,62 @@ mbcmd read4 --port <port_name> [options]
 
 `--count <register_count>` – The number of sequential registers to read (default: `1`).
 
+### write6
+*Write Holding Register*
+
+Usage:
+
+```
+mbcmd write6 --port <port_name> --value <value> [options]
+```
+
+`--port <port_name>` – The port to connect to. On Windows this will be in the form `COMX` where `X` is the assigned port number. On Linux this will be the serial port device file, e.g. `/dev/ttySX`.
+
+`--value <value>` - The 16-bit unsigned value to write to the register.
+
+`--baud <baud_rate>` – The baud rate for the port (default: `19200`).
+
+`--format <format>` – The data format (default: `8N1`). Only `8` data bits are currently supported. Parity modes supported are `N` (none), `E` (even), `O` (odd), `M` (mark) and `S` (space). `1` or `2` stop bits are supported.
+
+`--unitadr <unit_adr>` – The Modbus device address (default: `1`).
+
+`--regadr <register_address>` – The register address to write (default: `1`).
+
+`--count <register_count>` – The number of sequential registers to read (default: `1`).
+
+### write16
+*Write Multiple Holding Registers*
+
+Usage:
+
+```
+mbcmd write16 --port <port_name> --value <value> [options]
+```
+
+`--port <port_name>` – The port to connect to. On Windows this will be in the form `COMX` where `X` is the assigned port number. On Linux this will be the serial port device file, e.g. `/dev/ttySX`.
+
+`--values <value>` - The 16-bit unsigned values to write to the registers, seperated by spaces.
+
+`--baud <baud_rate>` – The baud rate for the port (default: `19200`).
+
+`--format <format>` – The data format (default: `8N1`). Only `8` data bits are currently supported. Parity modes supported are `N` (none), `E` (even), `O` (odd), `M` (mark) and `S` (space). `1` or `2` stop bits are supported.
+
+`--unitadr <unit_adr>` – The Modbus device address (default: `1`).
+
+`--regadr <register_address>` – The first register address to write (default: `1`).
+
+## Library Usage
+*[TODO]*
+
+## Dependencies
+* .NET Core 2.1.6 / .NET Standard 2.0
+* [SerialPortStream](https://www.nuget.org/packages/SerialPortStream/) - *Thanks [jcurl](https://github.com/jcurl)*
+* [CommandLineParser](https://www.nuget.org/packages/CommandLineParser/) - *Thanks [eric](https://github.com/ericnewton76)*
+
+*Note: All installers/packages include all required dependencies. Only a supported runtime (.NET Framework >4.6.1, .NET Core >2.0 or Mono >5.4) is required.*
 
 ## Road Map
+* Async support for libary.
 * Add support for other Modbus variants:
   - Modbus/ASCII
   - Modbus/TCP
