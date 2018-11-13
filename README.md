@@ -3,6 +3,11 @@ Modbus library and command line tools
 
 This is a basic, portable, Modbus library with associated command line tools, written for .NET Core.
 
+## Contents
+1. [Installation](#installation)
+1. [Command Line Usage](#command-line-usage)
+1. [Road Map](#road-map)
+
 ## Installation
 Run the appropriate installer for your platform (only Windows x86 and Window x64 installers are currently available, but Linux packages will be available in the future).
 
@@ -31,6 +36,8 @@ with the following supported verbs:
 
 
 ### read3
+*Read Holding Registers*
+
 Usage:
 
 ```
@@ -45,9 +52,30 @@ mbcmd read3 --port <port_name> [options]
 
 `--unitadr <unit_adr>` – The Modbus device address (default: `1`).
 
-`--regadr <register_address> – The first register address to read (default: `1`).
+`--regadr <register_address>` – The first register address to read (default: `1`).
 
-`--count <register_count> – The number of sequential registers to read (default: `1`).
+`--count <register_count>` – The number of sequential registers to read (default: `1`).
+
+### read4
+*Read Input Registers*
+
+Usage:
+
+```
+mbcmd read4 --port <port_name> [options]
+```
+
+`--port <port_name>` – The port to connect to. On Windows this will be in the form `COMX` where `X` is the assigned port number. On Linux this will be the serial port device file, e.g. `/dev/ttySX`.
+
+`--baud <baud_rate>` – The baud rate for the port (default: `19200`).
+
+`--format <format>` – The data format (default: 8N1). Only `8` data bits are currently supported. Parity modes supported are `N` (none), `E` (even), `O` (odd), `M` (mark) and `S` (space). `1` or `2` stop bits are supported.
+
+`--unitadr <unit_adr>` – The Modbus device address (default: `1`).
+
+`--regadr <register_address>` – The first register address to read (default: `1`).
+
+`--count <register_count>` – The number of sequential registers to read (default: `1`).
 
 
 ## Road Map
