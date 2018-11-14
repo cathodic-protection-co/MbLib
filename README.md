@@ -6,6 +6,7 @@ This is a basic, portable, Modbus library with associated command line tools, wr
 ## Contents
 1. [Installation](#installation)
 1. [Command Line Usage](#command-line-usage)
+1. [Interactive Session Usage](#interactive-session-usage)
 1. [Library Usage](#library-usage)
 1. [Dependencies](#dependencies)
 1. [Road Map](#road-map)
@@ -24,13 +25,13 @@ mbcmd <verb> <options>
 
 with the following supported verbs:
 
-`read3` – Send a single ‘Read Holding Registers’ command to a device. ([link](#read3))
+`read3` – Send a single 'Read Holding Registers' command to a device. ([link](#read3))
 
-`read4` – Send a single ‘Read Input Registers’ command to a device. ([link](#read4))
+`read4` – Send a single 'Read Input Registers' command to a device. ([link](#read4))
 
-`write6` – Send a single ‘Write Holding Register’ command to a device. ([link](#write6))
+`write6` – Send a single 'Write Holding Register' command to a device. ([link](#write6))
 
-`write16` – Send a single ‘Write Multiple Holding Registers` command to a device. ([link](#read16))
+`write16` – Send a single 'Write Multiple Holding Registers' command to a device. ([link](#read16))
 
 `interactive` – Start an interactive session on the specified port. ([link](#interactive))
 
@@ -75,7 +76,7 @@ mbcmd read4 --port <port_name> [options]
 
 `--unitadr <unit_adr>` – The Modbus device address (default: `1`).
 
-`--regadr <register_address>` – The first register address to read (default: `1`).
+`--regadr <register_address>` – The first register address to read (default: `0`).
 
 `--count <register_count>` – The number of sequential registers to read (default: `1`).
 
@@ -98,7 +99,7 @@ mbcmd write6 --port <port_name> --value <value> [options]
 
 `--unitadr <unit_adr>` – The Modbus device address (default: `1`).
 
-`--regadr <register_address>` – The register address to write (default: `1`).
+`--regadr <register_address>` – The register address to write (default: `0`).
 
 `--count <register_count>` – The number of sequential registers to read (default: `1`).
 
@@ -121,7 +122,55 @@ mbcmd write16 --port <port_name> --value <value> [options]
 
 `--unitadr <unit_adr>` – The Modbus device address (default: `1`).
 
-`--regadr <register_address>` – The first register address to write (default: `1`).
+`--regadr <register_address>` – The first register address to write (default: `0`).
+
+### interactive
+*Start an interactive session*
+
+Usage:
+
+```
+mbcmd interactive --port <port_name> [options]
+```
+
+`--port <port_name>` – The port to connect to. On Windows this will be in the form `COMX` where `X` is the assigned port number. On Linux this will be the serial port device file, e.g. `/dev/ttySX`.
+
+`--baud <baud_rate>` – The baud rate for the port (default: `19200`).
+
+`--format <format>` – The data format (default: `8N1`). Only `8` data bits are currently supported. Parity modes supported are `N` (none), `E` (even), `O` (odd), `M` (mark) and `S` (space). `1` or `2` stop bits are supported.
+
+See [Interactive Session Usage](#interactive-session-usage) for how to use this mode.
+
+
+### detect-ports
+*Attempts to list all serial ports which are connected to a Modbus network*
+
+Usage:
+
+```
+mbcmd detect-ports [options]
+```
+`--baud <baud_rate>` – The baud rate for the port (default: `19200`).
+
+`--format <format>` – The data format (default: `8N1`). Only `8` data bits are currently supported. Parity modes supported are `N` (none), `E` (even), `O` (odd), `M` (mark) and `S` (space). `1` or `2` stop bits are supported.
+
+`--unitadr <unit_adr>` – The Modbus device address (default: `1`).
+
+This command attempts to open each serial port in turn and issues a Read Holding Registers command to a device. If any valid Modbus message is received (including Modbus exception messages), then the name of the port is shown. 
+
+## Interactive Session Usage
+The interactive session supports the following commands:
+
+
+`read3 <unit_adr> <reg_adr> <reg_count>` - Read holding registers.
+`read4 <unit_adr> <reg_adr> <reg_count>` - Read input registers.
+`write6 <unit_adr> <reg_adr> <value>` - Write holding register.
+`write16 <unit_adr> <reg_adr> <value1> <value2> ...` - Write multiple holding registers.
+`portinfo` - Display connection information.
+`help` - Display command list.
+`close` - Close the port and exit.
+
+All parameters for each command are required (i.e. there are no assumed defaults in interactive mode).
 
 ## Library Usage
 *[TODO]*
@@ -131,7 +180,7 @@ mbcmd write16 --port <port_name> --value <value> [options]
 * [SerialPortStream](https://www.nuget.org/packages/SerialPortStream/) - *Thanks [jcurl](https://github.com/jcurl)*
 * [CommandLineParser](https://www.nuget.org/packages/CommandLineParser/) - *Thanks [eric](https://github.com/ericnewton76)*
 
-*Note: All installers/packages include all required dependencies. Only a supported runtime (.NET Framework >4.6.1, .NET Core >2.0 or Mono >5.4) is required.*
+*Note: All installers/packages include all required dependencies.*
 
 ## Road Map
 * Async support for libary.
