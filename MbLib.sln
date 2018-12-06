@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2016
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MbLib", "MbLib\MbLib.csproj", "{B37E73B9-1C44-48A1-89AF-F0BDCDFE1156}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MbLib", "MbLib\MbLib.csproj", "{B37E73B9-1C44-48A1-89AF-F0BDCDFE1156}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MbCmd", "MbCmd\MbCmd.csproj", "{1DC73A28-DFC2-4606-B9F1-7ED30F063357}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MbCmd", "MbCmd\MbCmd.csproj", "{1DC73A28-DFC2-4606-B9F1-7ED30F063357}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MbLib.Tests", "MbLib.Tests\MbLib.Tests.csproj", "{9E9777A2-3121-413C-889E-E56B826DE175}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{1DC73A28-DFC2-4606-B9F1-7ED30F063357}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1DC73A28-DFC2-4606-B9F1-7ED30F063357}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1DC73A28-DFC2-4606-B9F1-7ED30F063357}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E9777A2-3121-413C-889E-E56B826DE175}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E9777A2-3121-413C-889E-E56B826DE175}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E9777A2-3121-413C-889E-E56B826DE175}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E9777A2-3121-413C-889E-E56B826DE175}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
