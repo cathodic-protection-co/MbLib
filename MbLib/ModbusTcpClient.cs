@@ -7,7 +7,7 @@ using System.Net.Sockets;
 
 namespace MbLib
 {
-    class ModbusTcpClient : ModbusClient, IDisposable
+    public class ModbusTcpClient : ModbusClient, IDisposable
     {
         private TcpClient _client;
         private Stream _stream => _client.GetStream();
@@ -36,13 +36,14 @@ namespace MbLib
         private void Send(byte[] buffer)
         {
             _stream.Write(buffer, 0, buffer.Length);
+            _stream.Flush();
         }
 
         private void Recv(byte[] buffer, int offset, int length)
         {
             int totalRead = 0;
             int bytesRead;
-            while ((bytesRead = _stream.Read(buffer, offset + totalRead, length - totalRead)) != 0)
+            while (totalRead < length && (bytesRead = _stream.Read(buffer, offset + totalRead, length - totalRead)) != 0)
                 totalRead += bytesRead;
             if (totalRead < length)
                 throw new EndOfStreamException();
